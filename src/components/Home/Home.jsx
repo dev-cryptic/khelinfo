@@ -7,7 +7,7 @@ function Home() {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get('https://newsapi.org/v2/everything', {
+        const response = await axios.get('https://localhost:4000/api/news', {
           params: {
             q: 'sports',
             from: '2025-06-12',
