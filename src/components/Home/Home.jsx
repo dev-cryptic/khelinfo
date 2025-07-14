@@ -5,29 +5,30 @@ function Home() {
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
-    const fetchBlogs = async () => {
-      try {
-        const response = await axios.get('https://newsapi.org/v2/everything', {
-          params: {
-            q: 'sports',
-            from: '2025-06-12',
-            sortBy: 'publishedAt',
-            pageSize: 13,
-            language: 'en',
-            apiKey: '07f4da41dd6f4e8aaac40ee0d4fb9656',
-          },
-        });
-        const blogData = response.data.articles.map((article) => ({
-          title: article.title,
-          description: article.description,
-          image: article.urlToImage,
-          link: article.url,
-        }));
-        setBlogs(blogData);
-      } catch (error) {
-        console.error('Error fetching sports blogs', error);
-      }
-    };
+  const fetchBlogs = async () => {
+    try {
+      const response = await axios.get('https://gnews.io/api/v4/top-headlines', {
+        params: {
+          category: 'sports',
+          lang: 'en',
+          country: 'us',
+          max: 10,
+          apikey: 'd405261c3d34964224275d0e940b794f',
+        },
+      });
+
+      const blogData = response.data.articles.map((article) => ({
+        title: article.title,
+        description: article.description,
+        image: article.image, // GNews uses `image`, not `urlToImage`
+        link: article.url,
+      }));
+
+      setBlogs(blogData);
+    } catch (error) {
+      console.error('Error fetching sports blogs', error);
+    }
+  };
 
     fetchBlogs();
   }, []);
@@ -161,7 +162,7 @@ function Home() {
       </section>
 
       {/* Sports Blogs Section */}
-      <section className="text-gray-600 body-font">
+       <section className="text-gray-600 body-font">
         <div className="container px-3 sm:px-5 py-10 sm:py-14 mx-auto">
           <div className="text-center mb-8 sm:mb-12">
             <h1 className="text-2xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">Top Sports Buzz</h1>
