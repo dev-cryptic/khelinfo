@@ -6,6 +6,10 @@ import Home from './components/Home/Home.jsx'
 import Cricket from './components/Cricket/Cricket.jsx'
 import FootballScoreboard from './components/Scoreboard/FootballScoreboard.jsx'
 import App from './App.jsx'
+import Careers from './pages/Careers.jsx'
+import Advertise from './pages/Advertise.jsx'
+import Terms from './pages/Terms.jsx'
+import Privacy from './pages/Privacy.jsx'
 
 
 
@@ -20,6 +24,10 @@ const router = createBrowserRouter(
       
        
       <Route path='Football' element = {<FootballScoreboard />} />
+      <Route path='advertise' element = {<Advertise />} />
+      <Route path='terms' element = {<Terms />} />
+      <Route path='privacy' element = {<Privacy />} />
+      <Route path='careers' element = {<Careers />} />
       
     </Route>
     

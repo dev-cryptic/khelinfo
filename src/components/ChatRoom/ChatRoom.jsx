@@ -1,26 +1,87 @@
+// src/pages/ChatRoom.jsx
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import { database, ref, push, onChildAdded, off } from "../../firebase";
+
+
 
 const ChatRoom = ({ isOpen, toggleOpen, buttonRef }) => {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const [username, setUsername] = useState(localStorage.getItem("username") || "");
   const [tempUsername, setTempUsername] = useState("");
-  const [darkMode, setDarkMode] = useState(
-    localStorage.getItem("theme") === "dark"
-  );
+  const [darkMode, setDarkMode] = useState(localStorage.getItem("theme") === "dark");
 
   const chatRef = useRef(null);
+  const messagesEndRef = useRef(null);
 
-  const handleClickOutside = useCallback((event) => {
-    if (
-      chatRef.current &&
-      !chatRef.current.contains(event.target) &&
-      buttonRef.current &&
-      !buttonRef.current.contains(event.target)
-    ) {
-      toggleOpen(false);
+  // 🔁 Firebase message listener
+  useEffect(() => {
+    const messagesRef = ref(database, "messages");
+
+    const handleNewMessage = (snapshot) => {
+      const msg = snapshot.val();
+      setMessages((prev) => [...prev, msg]);
+    };
+
+    onChildAdded(messagesRef, handleNewMessage);
+
+    return () => {
+      off(messagesRef, "child_added", handleNewMessage);
+    };
+  }, []);
+
+  // 📤 Send message
+  const sendMessage = async () => {
+    const trimmed = message.trim();
+    if (!trimmed) return;
+
+    const newMessage = {
+      sender: username || "Guest",
+      message: trimmed,
+      createdAt: Date.now(),
+    };
+
+    await push(ref(database, "messages"), newMessage);
+    setMessage("");
+  };
+
+  // ⌨️ Enter key support
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") sendMessage();
+  };
+
+  // 💾 Save name
+  const saveUsername = () => {
+    const trimmed = tempUsername.trim();
+    if (trimmed.length >= 3) {
+      setUsername(trimmed);
+      localStorage.setItem("username", trimmed);
+    } else {
+      alert("Please enter at least 3 characters.");
     }
-  }, [toggleOpen, buttonRef]);
+  };
+
+  // 🌗 Toggle theme
+  const toggleTheme = () => {
+    const newTheme = !darkMode;
+    setDarkMode(newTheme);
+    localStorage.setItem("theme", newTheme ? "dark" : "light");
+  };
+
+  // 🛑 Click outside to close
+  const handleClickOutside = useCallback(
+    (event) => {
+      if (
+        chatRef.current &&
+        !chatRef.current.contains(event.target) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target)
+      ) {
+        toggleOpen(false);
+      }
+    },
+    [toggleOpen, buttonRef]
+  );
 
   useEffect(() => {
     if (isOpen) {
@@ -31,33 +92,10 @@ const ChatRoom = ({ isOpen, toggleOpen, buttonRef }) => {
     };
   }, [isOpen, handleClickOutside]);
 
-  const sendMessage = () => {
-    if (message.trim()) {
-      setMessages([...messages, { sender: username || "Guest", message }]);
-      setMessage("");
-    }
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      sendMessage();
-    }
-  };
-
-  const saveUsername = () => {
-    if (tempUsername.trim().length >= 3) {
-      setUsername(tempUsername);
-      localStorage.setItem("username", tempUsername);
-    } else {
-      alert("Please enter at least 3 characters for your name.");
-    }
-  };
-
-  const toggleTheme = () => {
-    const newTheme = !darkMode;
-    setDarkMode(newTheme);
-    localStorage.setItem("theme", newTheme ? "dark" : "light");
-  };
+  // 🔽 Scroll to bottom on new message
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   if (!isOpen) return null;
 
@@ -67,7 +105,7 @@ const ChatRoom = ({ isOpen, toggleOpen, buttonRef }) => {
         ref={chatRef}
         className={`${darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"} w-80 rounded-xl shadow-2xl border border-gray-300 p-4 relative`}
       >
-        {/* Theme Toggle */}
+        {/* Theme Switch */}
         <button
           className="absolute top-2 right-2 px-2 py-1 text-xs rounded-full border"
           onClick={toggleTheme}
@@ -75,6 +113,7 @@ const ChatRoom = ({ isOpen, toggleOpen, buttonRef }) => {
           {darkMode ? "☀️" : "🌙"}
         </button>
 
+        {/* Username Input */}
         {!username ? (
           <div className="mt-6 text-center">
             <h2 className="text-lg font-semibold mb-2">Enter Your Name</h2>
@@ -117,7 +156,10 @@ const ChatRoom = ({ isOpen, toggleOpen, buttonRef }) => {
                   </div>
                 ))
               )}
+              <div ref={messagesEndRef} />
             </div>
+
+            {/* Message Input */}
             <div className="flex">
               <input
                 className={`${darkMode ? "bg-gray-700 border-gray-600 text-white" : "bg-white border-gray-300 text-black"} flex-grow px-3 py-2 rounded-l-lg border focus:outline-none`}

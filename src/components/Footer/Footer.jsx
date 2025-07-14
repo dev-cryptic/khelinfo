@@ -1,3 +1,7 @@
+import { Link } from 'react-router-dom';
+
+
+
 function Footer() {
   return (
     <footer className="text-gray-600 shadow-sm body-font text-[10px] sm:text-xs">
@@ -27,11 +31,11 @@ function Footer() {
         {/* Company */}
         <div className="w-[45%] sm:w-[22%] md:w-[18%] min-w-[100px]">
           <h2 className="font-semibold text-gray-900 mb-1">Company</h2>
-          <ul className="list-none space-y-1">
-            <li><a className="hover:text-gray-800">Careers</a></li>
-            <li><a className="hover:text-gray-800">Advertise</a></li>
-            <li><a className="hover:text-gray-800">Privacy</a></li>
-            <li><a className="hover:text-gray-800">Terms</a></li>
+          <ul className="list-none space-y-1 grid">
+            <Link to='/careers' className="hover:text-gray-800">Careers </Link>
+            <Link to='/advertise' className="hover:text-gray-800">Advertise</Link>
+            <Link to='privacy' className="hover:text-gray-800">Privacy</Link>
+            <Link to='terms'className="hover:text-gray-800">Terms</Link>
           </ul>
         </div>
 
@@ -39,7 +43,7 @@ function Footer() {
         <div className="w-[45%] sm:w-[22%] md:w-[18%] min-w-[100px]">
           <h2 className="font-semibold text-gray-900 mb-1">Sports</h2>
           <ul className="list-none space-y-1">
-            <li><a className="hover:text-gray-800">Cricket</a></li>
+            <Link to='cricket' className="hover:text-gray-800">Cricket</Link>
             <li><a className="hover:text-gray-800">Football</a></li>
             <li><a className="hover:text-gray-800">Kabaddi</a></li>
             <li><a className="hover:text-gray-800">Basketball</a></li>
@@ -52,7 +56,7 @@ function Footer() {
           <ul className="list-none space-y-1">
             <li>
               <a
-                href="https://khelinfo.com"
+                href="https://khelinfo.in"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-gray-800"
@@ -79,7 +83,7 @@ function Footer() {
                 <path d="M23 3a10.9 10.9 0 01-3.14 1.53A4.48 4.48 0 0012 7v1a10.66 10.66 0 01-9-4s-4 9 5 13c-3 2-7 2-7 2 9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
               </svg>
             </a>
-            <a href="https://www.instagram.com/nikhilsinghrajput._/" className="text-gray-500">
+            <a href="https://www.instagram.com/khelinfo.official/" className="text-gray-500">
               <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
                 <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01" />
