@@ -1,6 +1,10 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
+import "./i18n"; // 👈 very important
+
+
+
 import Layout from './Layout.jsx'
 import Home from './components/Home/Home.jsx'
 import Cricket from './components/Cricket/Cricket.jsx'
