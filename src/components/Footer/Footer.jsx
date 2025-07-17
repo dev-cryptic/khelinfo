@@ -9,15 +9,14 @@ function Footer() {
       <div className="px-4 py-4 mx-auto max-w-screen-xl flex flex-wrap justify-between gap-y-6">
         {/* Description */}
         <div className="w-[45%] sm:w-[22%] md:w-[18%] min-w-[120px]">
-          <a className="flex title-font font-medium items-center text-gray-900 mb-1">
+          <a className="flex title-font font-medium items-start text-gray-900 mb-1">
             <img
               src="/KHELiNFOlogo.png"
               alt="KHELiNFO Logo"
               className="h-5 sm:h-6 object-contain"
             />
           </a>
-          <p className="leading-tight">All-in-one sports platform</p>
-          <p className="leading-tight">with real-time updates.</p>
+          <p className="leading-tight">All-in-one sports platform with real-time updates.</p>
         </div>
 
         {/* Quick Links */}
@@ -35,7 +34,7 @@ function Footer() {
             <Link to='/careers' className="hover:text-gray-800">Careers </Link>
             <Link to='/advertise' className="hover:text-gray-800">Advertise</Link>
             <Link to='privacy' className="hover:text-gray-800">Privacy</Link>
-            <Link to='terms'className="hover:text-gray-800">Terms</Link>
+            <Link to='terms' className="hover:text-gray-800">Terms</Link>
           </ul>
         </div>
 
@@ -43,10 +42,10 @@ function Footer() {
         <div className="w-[45%] sm:w-[22%] md:w-[18%] min-w-[100px]">
           <h2 className="font-semibold text-gray-900 mb-1">Sports</h2>
           <ul className="list-none space-y-1">
-            <Link to='cricket' className="hover:text-gray-800">Cricket</Link>
-            <li><a className="hover:text-gray-800">Football</a></li>
-            <li><a className="hover:text-gray-800">Kabaddi</a></li>
-            <li><a className="hover:text-gray-800">Basketball</a></li>
+            <li><Link to='cricket' className="hover:text-gray-800">Cricket</Link></li>
+            <li><Link to="/football" className="hover:text-gray-800">Football</Link></li>
+            <li><Link to="/kabaddi" className="hover:text-gray-800">Kabaddi</Link></li>
+            <li><Link to="/basketball" className="hover:text-gray-800">Basketball</Link></li>
           </ul>
         </div>
 

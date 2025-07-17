@@ -10,6 +10,8 @@ import Careers from './pages/Careers.jsx'
 import Advertise from './pages/Advertise.jsx'
 import Terms from './pages/Terms.jsx'
 import Privacy from './pages/Privacy.jsx'
+import Football from './components/Football/Football.jsx'
+import Kabaddi from './components/Kabaddi/Kabaddi.jsx'
 
 
 
@@ -23,11 +25,12 @@ const router = createBrowserRouter(
         </Route>
       
        
-      <Route path='Football' element = {<FootballScoreboard />} />
+      <Route path='Football' element = {<Football />} />
       <Route path='advertise' element = {<Advertise />} />
       <Route path='terms' element = {<Terms />} />
       <Route path='privacy' element = {<Privacy />} />
       <Route path='careers' element = {<Careers />} />
+      <Route path="/Kabaddi" element={<Kabaddi />} />
       
     </Route>
     

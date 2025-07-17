@@ -59,7 +59,7 @@ function Header() {
       </div>
 
       {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-50 my-2">
+      <header className="bg-white shadow-sm sticky top-0 z-50 my-2 ">
         {/* Top header bar for all screens */}
         <div className="container mx-auto px-5 py-3 flex items-center justify-between md:justify-start">
 
@@ -73,7 +73,7 @@ function Header() {
           {/* Logo in center on mobile, left on desktop */}
           <div className="flex-1 text-center md:text-left md:flex md:items-center md:space-x-6">
             <Link to="/home" className="inline-flex items-center justify-center ">
-              <img src="/KHELiNFOlogo.png" alt="KHELiNFO Logo" className="h-6 object-contain my-5 mx-auto md:mx-0" />
+              <img src="/KHELiNFOlogo.png" alt="KHELiNFO Logo" className="h-6 object-contain my-0 mx-auto md:mx-0" />
             </Link>
 
             {/* Desktop nav links */}
@@ -84,10 +84,16 @@ function Header() {
                 onMouseEnter={() => setShowCricketDropdown(true)}
                 onMouseLeave={() => setShowCricketDropdown(false)}
               >
-                <button className="hover:text-[#012666] inline-flex items-center gap-1">
+                <Link
+                  to="/cricket"
+                  className="hover:text-[#012666] inline-flex items-center gap-1"
+                >
                   Cricket
-                  <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${showCricketDropdown ? 'rotate-180' : 'rotate-0'}`} />
-                </button>
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform duration-200 ${showCricketDropdown ? 'rotate-180' : 'rotate-0'
+                      }`}
+                  />
+                </Link>
                 {showCricketDropdown && (
                   <div className="absolute left-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg z-20">
                     <div className="py-1">
@@ -109,24 +115,21 @@ function Header() {
 
           {/* Login always on right */}
           <div className="md:ml-auto">
-            <button className="inline-flex items-center text-[10px] md:text-sm font-medium bg-gray-100 border border-gray-300 py-[5px] px-[6px] md:py-1 md:px-3 rounded hover:bg-[#012666] hover:text-white transition">
-              Login
-              <svg
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                className="w-3 h-3 ml-1"
-                viewBox="0 0 24 24"
-              >
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
+            <button
+              className="hover:text-[#012666] transition"
+              aria-label="Login"
+            >
+              <img
+                src="/user.png"
+                alt="Login"
+                className="w-6 h-6 md:w-7 md:h-7"
+              />
             </button>
           </div>
+
         </div>
         {mobileMenuOpen && (
-          <div className="fixed inset-0 z-40 md:hidden">
+          <div className="fixed inset-0 z-40 md:hidden ">
             {/* Overlay */}
             <div
               className="absolute inset-0 bg-black opacity-30"
