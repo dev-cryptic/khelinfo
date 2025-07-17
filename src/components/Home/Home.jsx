@@ -1,37 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function Home() {
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
-  const fetchBlogs = async () => {
-    try {
-      const response = await axios.get('https://gnews.io/api/v4/top-headlines', {
-        params: {
-          category: 'sports',
-          lang: 'en',
-          country: 'us',
-          max: 10,
-          apikey: 'd405261c3d34964224275d0e940b794f',
-        },
-      });
+    const fetchBlogs = async () => {
+      try {
+        const response = await axios.get('https://gnews.io/api/v4/top-headlines', {
+          params: {
+            category: 'sports',
+            lang: 'en',
+            country: 'us',
+            max: 10,
+            apikey: '5eed3c7f648610ff6e1c1d92be607d30',
+          },
+        });
 
-      const blogData = response.data.articles.map((article) => ({
-        title: article.title,
-        description: article.description,
-        image: article.image, // GNews uses `image`, not `urlToImage`
-        link: article.url,
-      }));
+        const blogData = response.data.articles.map((article) => ({
+          title: article.title,
+          description: article.description,
+          image: article.image, // GNews uses `image`, not `urlToImage`
+          link: article.url,
+        }));
 
-      setBlogs(blogData);
-    } catch (error) {
-      console.error('Error fetching sports blogs', error);
-    }
-  };
+        setBlogs(blogData);
+      } catch (error) {
+        console.error('Error fetching sports blogs', error);
+      }
+    };
+    
 
     fetchBlogs();
   }, []);
+
+
 
   const horizontalScrollContainer = "flex gap-4 overflow-x-auto pb-4 px-1 sm:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]";
   const badgeClass = "ml-2 px-2 py-0.5 rounded-full text-[10px] font-semibold whitespace-nowrap";
@@ -55,7 +59,22 @@ function Home() {
         <div className="container px-3 sm:px-5 py-5 mx-auto">
           <div className="flex justify-between items-center mb-4 sm:mb-8">
             <h1 className="text-lg sm:text-2xl font-bold text-gray-900">Cricket</h1>
-            <a href="#" className="text-indigo-500 hover:underline text-xs sm:text-sm font-medium">More</a>
+            <Link
+              to="/cricket"
+              className="inline-flex items-center gap-1 px-2 py-0.5 text-sm font-medium text-blue-900 hover:text-blue-700 transition-colors duration-200"
+            >
+              More
+              <svg
+                className="w-3.5 h-3.5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+
           </div>
           <div className={horizontalScrollContainer}>
             {[...Array(6)].map((_, i) => (
@@ -92,7 +111,23 @@ function Home() {
         <div className="container px-3 sm:px-5 py-5 mx-auto">
           <div className="flex justify-between items-center mb-4 sm:mb-8">
             <h1 className="text-lg sm:text-2xl font-bold text-gray-900">Football</h1>
-            <a href="#" className="text-indigo-500 hover:underline text-xs sm:text-sm font-medium">More</a>
+            <Link
+              to="/football"
+              className="inline-flex items-center gap-1 px-2 py-0.5 text-sm font-medium text-blue-900 hover:text-blue-700 transition-colors duration-200"
+            >
+              More
+              <svg
+                className="w-3.5 h-3.5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+
+
           </div>
           <div className={horizontalScrollContainer}>
             {[...Array(6)].map((_, i) => (
@@ -129,7 +164,23 @@ function Home() {
         <div className="container px-3 sm:px-5 py-5 mx-auto">
           <div className="flex justify-between items-center mb-4 sm:mb-8">
             <h1 className="text-lg sm:text-2xl font-bold text-gray-900">Kabaddi</h1>
-            <a href="#" className="text-indigo-500 hover:underline text-xs sm:text-sm font-medium">More</a>
+            <Link
+              to="/kabaddi"
+              className="inline-flex items-center gap-1 px-2 py-0.5 text-sm font-medium text-blue-900 hover:text-blue-700 transition-colors duration-200"
+            >
+              More
+              <svg
+                className="w-3.5 h-3.5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+
+
           </div>
           <div className={horizontalScrollContainer}>
             {[...Array(6)].map((_, i) => (
@@ -162,48 +213,34 @@ function Home() {
       </section>
 
       {/* Sports Blogs Section */}
-       <section className="text-gray-600 body-font">
-        <div className="container px-3 sm:px-5 py-10 sm:py-14 mx-auto">
-          <div className="text-center mb-8 sm:mb-12">
-            <h1 className="text-2xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">Top Sports Buzz</h1>
-            <p className="text-xs sm:text-sm text-gray-500 mt-1 sm:mt-2">Fresh highlights, recaps & insights</p>
-          </div>
-          {blogs.length > 0 ? (
-            <div className="columns-2 sm:columns-2 md:columns-4 gap-4 sm:gap-6 space-y-4 sm:space-y-6">
-              {blogs.map((blog, index) => (
-                <div
-                  key={index}
-                  className="break-inside-avoid bg-white shadow-lg border border-gray-100 rounded-xl overflow-hidden transition-transform duration-200 hover:scale-[1.015] hover:shadow-xl"
-                >
-                  <div className={`w-full overflow-hidden ${getCardSizeClass(index)}`}>
-                    <img
-                      className="w-full h-full object-cover"
-                      src={blog.image || 'https://via.placeholder.com/300'}
-                      alt={blog.title}
-                    />
-                  </div>
-                  <div className="p-3 sm:p-4">
-                    <h2 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">
-                      {blog.title.length > 80 ? blog.title.slice(0, 77) + '...' : blog.title}
-                    </h2>
-                    <p className="text-gray-600 mb-3 text-xs sm:text-sm">
-                      {blog.description ? blog.description.slice(0, 100) + '...' : 'No description available.'}
-                    </p>
-                    <a
-                      href={blog.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-indigo-600 hover:underline text-xs sm:text-sm font-medium"
-                    >
-                      Read Full Article →
-                    </a>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center text-gray-500 text-sm">No blogs available at the moment.</div>
-          )}
+      <section className="py-10 px-4 sm:px-8 lg:px-16 bg-white">
+        <h2 className="text-2xl font-semibold text-center text-black mb-8">Trendy Sports Buzz</h2>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {blogs.map((blog, index) => (
+            <a
+              key={index}
+              href={blog.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block bg-gray-50 rounded-2xl shadow-sm hover:shadow-md transition border border-transparent hover:border-black"
+            >
+              {blog.image && (
+                <img
+                  src={blog.image}
+                  alt="Blog Thumbnail"
+                  className="w-full h-40 object-cover rounded-t-2xl"
+                />
+              )}
+              <div className="p-4">
+                <h3 className="text-lg font-semibold text-black mb-2">
+                  {blog.title.length > 80 ? blog.title.slice(0, 77) + '...' : blog.title}
+                </h3>
+                <p className="text-sm text-gray-700">
+                  {blog.description?.length > 100 ? blog.description.slice(0, 97) + '...' : blog.description}
+                </p>
+              </div>
+            </a>
+          ))}
         </div>
       </section>
     </>
