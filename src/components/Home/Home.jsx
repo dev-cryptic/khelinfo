@@ -56,7 +56,7 @@ function Home() {
     <>
       {/* Cricket Section */}
       <section className="text-gray-600 body-font mb-5">
-        <div className="container px-3 sm:px-5 py-5 mx-auto">
+        <div className="container px-3 sm:px-5 py-0 mt-7 mx-auto">
           <div className="flex justify-between items-center mb-4 sm:mb-8">
             <h1 className="text-lg sm:text-2xl font-bold text-gray-900">Cricket</h1>
             <Link
@@ -108,7 +108,7 @@ function Home() {
 
       {/* Football Section */}
       <section className="text-gray-600 body-font mb-5">
-        <div className="container px-3 sm:px-5 py-5 mx-auto">
+        <div className="container px-3 sm:px-5 py-0 mx-auto">
           <div className="flex justify-between items-center mb-4 sm:mb-8">
             <h1 className="text-lg sm:text-2xl font-bold text-gray-900">Football</h1>
             <Link
@@ -161,7 +161,7 @@ function Home() {
 
       {/* Kabaddi Section */}
       <section className="text-gray-600 body-font mb-10">
-        <div className="container px-3 sm:px-5 py-5 mx-auto">
+        <div className="container px-3 sm:px-5 py-0 mx-auto">
           <div className="flex justify-between items-center mb-4 sm:mb-8">
             <h1 className="text-lg sm:text-2xl font-bold text-gray-900">Kabaddi</h1>
             <Link
