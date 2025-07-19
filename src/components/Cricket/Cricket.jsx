@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Cricket = () => {
   const [blogs, setBlogs] = useState([]);
@@ -39,15 +40,24 @@ const Cricket = () => {
       <header className="bg-white shadow-md py-4">
         <div className="container mx-auto flex flex-col items-center">
           <nav className="w-full flex flex-wrap justify-around sm:justify-around text-sm sm:text-base font-medium">
-            {['Live Scores', 'Schedule', 'News', 'Series', 'Teams', 'Rankings' ].map(item => (
-              <a
-                key={item}
-                href="#"
-                className="text-black hover:text-blue-800 transition-colors duration-200 text-sm sm:text-base"
-              >
-                {item}
-              </a>
-            ))}
+            {['Live Scores', 'Fixtures', 'News', 'Series', 'Teams', 'Rankings'].map((item) => {
+              const path =
+                item.toLowerCase() === 'rankings'
+                  ? '/rankings'
+                  : item.toLowerCase() === 'Fixtures'
+                    ? '/fixtures'
+                    : `/cricket/${item.toLowerCase().replace(/\s+/g, '-')}`;
+
+              return (
+                <Link
+                  key={item}
+                  to={path}
+                  className="text-black hover:text-blue-800 transition-colors duration-200 text-sm sm:text-base"
+                >
+                  {item}
+                </Link>
+              );
+            })}
           </nav>
         </div>
       </header>

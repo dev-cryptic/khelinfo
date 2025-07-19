@@ -16,7 +16,10 @@ import Terms from './pages/Terms.jsx'
 import Privacy from './pages/Privacy.jsx'
 import Football from './components/Football/Football.jsx'
 import Kabaddi from './components/Kabaddi/Kabaddi.jsx'
-
+import Rankings from './pages/Rankings.jsx';
+import Fixtures from './pages/Cricket/Fixtures.jsx';
+import Series from './pages/Cricket/Fixtures.jsx';
+import Teams from './pages/Cricket/Teams.jsx';
 
 
 const router = createBrowserRouter(
@@ -35,6 +38,11 @@ const router = createBrowserRouter(
       <Route path='privacy' element = {<Privacy />} />
       <Route path='careers' element = {<Careers />} />
       <Route path="/Kabaddi" element={<Kabaddi />} />
+      <Route path="/rankings" element={<Rankings />} />
+      <Route path="/fixtures" element={<Fixtures />} />
+      <Route path="/series" element={<Series />} />
+      <Route path="/teams" element={<Teams />} />
+
       
     </Route>
     

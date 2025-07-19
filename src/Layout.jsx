@@ -8,6 +8,7 @@ function Layout() {
     <>
       <Header />
       <ChatWidget /> {/* Floating chat bot icon */}
+      
       <Outlet />
       <Footer />
     </>

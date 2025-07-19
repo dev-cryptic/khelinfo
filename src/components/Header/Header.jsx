@@ -84,16 +84,37 @@ function Header() {
             </button>
             {showCricketDropdown && (
               <div className="absolute top-7 left-0 w-48 bg-white border border-gray-200 shadow-lg rounded-md z-40">
-                {["news", "fixtures", "results", "series", "teams", "rankings", "records"].map((item) => (
-                  <Link
-                    key={item}
-                    to={`/cricket/${item}`}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    {t(item)}
-                  </Link>
-                ))}
+                {[
+                  "news",
+                  "fixtures",
+                  "series",
+                  "teams",
+                  "rankings"
+                ].map((item) => {
+                  const path =
+                    item === "rankings" ? "/rankings" :
+                      item === "fixtures" ? "/fixtures" :
+                        item === "series" ? "/series" :
+                          item === "teams" ? "/teams" :
+                            `/cricket/${item}`;
+
+                  return (
+                    <Link
+                      key={item}
+                      to={path}
+                      onClick={() => setShowCricketDropdown(false)}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      {t(item)}
+                    </Link>
+                  );
+                })}
+
+
               </div>
+
+
+
             )}
           </div>
 
@@ -118,16 +139,39 @@ function Header() {
                   <ChevronDown className="w-3 h-3 group-open:rotate-180 transition duration-200" />
                 </summary>
                 <div className="pl-3 space-y-1">
-                  {["news", "fixtures", "results", "series", "teams", "rankings", "records"].map((item) => (
-                    <Link
-                      key={item}
-                      to={`/cricket/${item}`}
-                      className="block py-1 text-sm text-gray-700 hover:text-[#012666]"
-                    >
-                      {t(item)}
-                    </Link>
-                  ))}
+                  {[
+                    "news",
+                    "fixtures",
+                    "series",
+                    "teams",
+                    "rankings"
+                  ].map((item) => {
+                    const path =
+                      item === "rankings"
+                        ? "/rankings"
+                        : item === "fixtures"
+                          ? "/fixtures"
+                          : item === "series"
+                            ? "/series"
+                            : item === "teams"
+                              ? "/teams"
+                              : `/${item}`;
+
+                    return (
+                      <Link
+                        key={item}
+                        to={path}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block py-1 text-sm text-gray-700 hover:text-[#012666]"
+                      >
+                        {t(item)}
+                      </Link>
+                    );
+                  })}
+
+
                 </div>
+
               </details>
               <Link to="/football" className="block py-2 text-sm text-gray-700 hover:text-[#012666]">{t("football")}</Link>
               <Link to="/kabaddi" className="block py-2 text-sm text-gray-700 hover:text-[#012666]">{t("kabaddi")}</Link>
